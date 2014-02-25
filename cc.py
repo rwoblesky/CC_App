@@ -1,22 +1,29 @@
-
 #this is an attempt to mock up the convict conditioning app via simple python
-
 
 #to-do; build file checker. if workout.txt (need to convert to .csv when I can test on my comp) doesn't exist, create it.  
 
 #import datetime module for timestamping when writing to workout.txt
 import datetime
 
-
-
 #define body parts for workout 
 big_six = ["Chest", "Core (Abs)", "Back (Pull)", "Shoulders (Push)", "Lower Body", "Core (Back)", "Grip (Hang)"]
-def print_big_six():
-	print "What are we going to work out?"
+
+#define chest exercises. is there a better way to manage all this data? we'll have essentially 6 lists w/ 10 steps...lots of data to hard code....csv?
+#i bet i could store this data in a csv, then have the file read a line based on the selection....
+chest = ["Wall Pushups", "Incline Pushups", "Kneeling Pushups","Half Pushups","Full Pushups","Close Pushups","Uneven Pushups","Half One-Arm Pushups","Lever Pushups","One Arm Pushups"]
+core_abs = ["Knee Tucks","Flat Knee Raises","Flat Bent Leg Raises","Flat Frog Raises","Flat Straight Leg Raises","Hanging Knee Raises","Hanging Bent Leg Raises","Hanging Frog Raises","Partial Straight Leg Raises","Hanging Straight Leg Raises"]
+lower =["Shoulderstand Squats","Jackknife Squats","Supported Squats","Half Squats","Full Squats","Close Squats","Uneven Squats","Half One Leg Squats","Assisted One Leg Squats","One Leg Squats"]
+back = ["Vertical Pulls","Horizontal Pulls","Jackknife Pulls","Half Pullups","Full Pullups","Close Pullups","Uneven Pullups","1/2 One Arm Pullups","Assisted One Arm Pullups","One Arm Pullups"]
+shoulders = ["Wall Headstands","Crow Stands","Wall Handstands","Half Handstand Pushups","Hand Stands Pushups","Close Handstand Pushups","Uneven Handstand Pushups","1/2 One Arm Handstand Pushups","Lever Handstand Pushups","One Arm Handstand Pushups"]
+core_back =["Short Bridges","Straight Bridges","Angled Bridges","Head Bridges","Half Bridges","Full Bridges","Wall Walking Bridges (Down)","Wall Walking Bridges (Up)","Closing Bridges","Stand to Stand Bridges"]
+
+# simple function that we'll use to print values of list (gives user mapping of list contents to file). Maybe in future remove 0 value.
+def print_list_for_mapping(a):
 	step = 0
-	for body_part in big_six:
-		print "%s = %s" % (step, body_part)
+	for value in a:
+		print "%s = %s" % (step, value)
 		step += 1
+	
 #to-do, build in exception checker if user does not select a number
 
 #define steps (not sure why yet?)
@@ -24,7 +31,8 @@ steps = [1,2,3,4,5,6,7,8,9,10]
 
 # asks user to select a body part
 def start():
-	print_big_six()
+	print "What are we going to work out?"
+	print_list_for_mapping(big_six)
 	select = raw_input("Select Number 0-"+(str(len(big_six)-1))+" to select a body part\n>")
 	if int(select) >= len(big_six):
 		print "Sorry, 0-5 please"
@@ -75,6 +83,18 @@ def write_to_file(user, workout, step_today, set_record):
 
 def rep_workflow():
 	workout = start()
+	if workout == "Chest":
+		print "Select a Chest Step:"
+		print_list_for_mapping(chest)
+	elif workout == "Core (Abs)":
+		print "Select a Core (Abs) Step:"
+		print_list_for_mapping(core_abs)
+	if workout == "Back (Pull)":
+		print "Select a Back Step:"
+		print_list_for_mapping(back)
+	elif workout == "Core (Abs)":
+		print "Select a Core (Abs) Step:"
+		print_list_for_mapping(core_abs)	
 	step_today = raw_input("Which step? 1-10\n>")
 
 	print "OK you want to work out your %s at step %s, right?" % (workout,step_today)
