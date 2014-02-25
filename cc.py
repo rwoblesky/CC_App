@@ -89,12 +89,20 @@ def rep_workflow():
 	elif workout == "Core (Abs)":
 		print "Select a Core (Abs) Step:"
 		print_list_for_mapping(core_abs)
-	if workout == "Back (Pull)":
+	elif workout == "Back (Pull)":
 		print "Select a Back Step:"
 		print_list_for_mapping(back)
-	elif workout == "Core (Abs)":
-		print "Select a Core (Abs) Step:"
-		print_list_for_mapping(core_abs)	
+	elif workout == "Shoulders (Push)":
+		print "Select a Shoulders Step:"
+		print_list_for_mapping(shoulders)
+	elif workout == "Lower Body":
+		print "Select a Lower Body Step:"
+		print_list_for_mapping(lower)
+	elif workout == "Core (Back)":
+		print "Select a Core Back Step:"
+		print_list_for_mapping(core_back)
+	else:
+		print "Sorry, values not defined yet. Look for an update soon!"
 	step_today = raw_input("Which step? 1-10\n>")
 
 	print "OK you want to work out your %s at step %s, right?" % (workout,step_today)
